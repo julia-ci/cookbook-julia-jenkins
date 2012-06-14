@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <authorizationStrategy class="org.jenkinsci.plugins.GithubAuthorizationStrategy">
+    <rootACL>
+      <organizationNameList class="linked-list">
+          <string><%= node[:julia_jenkins][:github][:organization].strip %></string>
+      </organizationNameList>
+      <adminUserNameList class="linked-list">
+          <string><%= node[:julia_jenkins][:github][:admin_user].strip %></string>
+      </adminUserNameList>
+      <authenticatedUserReadPermission>false</authenticatedUserReadPermission>
+      <allowGithubWebHookPermission>false</allowGithubWebHookPermission>
+      <allowCcTrayPermission>false</allowCcTrayPermission>
+      <allowAnonymousReadPermission>false</allowAnonymousReadPermission>
+    </rootACL>
+  </authorizationStrategy>
+  <securityRealm class="org.jenkinsci.plugins.GithubSecurityRealm">
+    <githubUri>https://github.com</githubUri>
+    <clientID><%= node[:julia_jenkins][:github][:clientID].strip %></clientID>
+    <clientSecret><%= node[:julia_jenkins][:github][:clientSecret].strip %></clientSecret>
+  </securityRealm>
+</hudson>
